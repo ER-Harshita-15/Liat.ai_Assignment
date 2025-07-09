@@ -1,0 +1,120 @@
+# Player ReID Assignment - LIAT.AI
+
+This project performs **Player Re-Identification** across two different camera views of a football game using object detection, tracking, and deep visual feature embeddings.
+
+## 📁 Folder Structure
+
+```
+Assignment_liat.ai/
+├── detect_and_match.py        # Main runner script
+├── best.pt                    # Pretrained YOLOv8 model (not in repo due to size)
+├── utils/
+│   ├── tracker.py             # Player and ball tracking logic
+│   └── matcher.py             # Player matching logic using embeddings
+├── results/
+│   ├── matches/               # Debug match images
+│   ├── broadcast_tracks.pkl   # Pickled detection+tracking results
+│   └── tacticam_tracks.pkl
+├── Assignment Materials/
+│   ├── broadcast.mp4
+│   └── tacticam.mp4
+├── player_mappings.csv        # Final ID mapping results
+└── resume.pdf                 # Your latest resume
+```
+
+---
+
+## ✅ Assignment Checklist
+
+* [x] Player detection using YOLOv8
+* [x] Player tracking using DeepSORT
+* [x] Identity matching between views
+* [x] Visual+spatial embedding based scoring
+* [x] Final mapping CSV created
+* [x] Matched image pairs saved for verification
+* [x] README with instructions and structure
+* [x] Resume attached (`resume.pdf`)
+* [ ] Optional: Note on computer vision/VLM experience
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1. Create Virtual Environment
+
+```bash
+python -m venv venv
+source venv/bin/activate  # or venv\Scripts\activate on Windows
+```
+
+### 2. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+If you don’t have a `requirements.txt`, install manually:
+
+```bash
+pip install opencv-python torch torchvision ultralytics deep_sort_realtime
+```
+
+### 3. Place YOLO Model
+
+Put the provided `best.pt` file (custom YOLOv8 model) into the root folder.
+
+### 4. Run the Main Script
+
+```bash
+python detect_and_match.py
+```
+
+This will:
+
+* Load or generate tracking data using YOLO and DeepSORT
+* Extract deep visual features from frames
+* Match players across views using cosine similarity and spatial distance
+* Save matched image pairs and ID mappings
+
+---
+
+## 🧠 How Matching Works
+
+1. Players are detected and tracked in both videos using YOLO + DeepSORT.
+2. Each player’s best frame is selected based on bounding box area.
+3. Cropped images are passed through ResNet18 to extract embeddings.
+4. Visual similarity + spatial distance are used to compute a matching score.
+5. Debug images are saved, and final mapping is exported to CSV.
+
+---
+
+## 📄 Output Files
+
+* `player_mappings.csv`: Lists matched player IDs between the two videos
+* `results/matches/*.jpg`: Side-by-side comparison images of matched players
+* `.pkl` files: Cached detection/tracking outputs to avoid recomputation
+
+---
+
+## 🔍 Notes
+
+* The object detector is trained specifically on football player and ball classes
+* Only valid bounding boxes are used for embeddings
+* All preprocessing (resizing, normalization) follows ImageNet standards
+
+---
+
+## 🧩 To Improve
+
+* Add OCR to detect jersey numbers
+* Use temporal consistency (track overlap) for more robust matching
+* Apply L2-normalization to embeddings
+* Save matching scores per pair for analysis
+
+---
+
+## 🙌 Author
+
+Prepared by Harshita Pandey for LIAT.AI assignment.
+
+
