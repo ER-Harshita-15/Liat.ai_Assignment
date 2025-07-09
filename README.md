@@ -108,7 +108,7 @@ Assignment_liat.ai/
 
 ## About the Author
 
-Prepared by **Harshita Pandey** for the LIAT.AI assignment.  
+Prepared by **Harshita Pande** for the LIAT.AI assignment.  
 For questions or collaboration, please refer to the attached `Resume.docx`.
 
 ## License
