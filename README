@@ -1,13 +1,22 @@
-# Player ReID Assignment - LIAT.AI
+# Player Re-Identification Assignment &nbsp; ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python) ![YOLOv8](https://img.shields.io/badge/YOLOv8-Object%20Detection-green) ![DeepSORT](https://img.shields.io/badge/DeepSORT-Tracking-orange)
 
-This project performs **Player Re-Identification** across two different camera views of a football game using object detection, tracking, and deep visual feature embeddings.
+> **Football Player Re-Identification across Multiple Camera Views**  
+> Assignment for LIAT.AI &mdash; by Harshita Pandey
 
-## 📁 Folder Structure
+---
+
+## 📚 Overview
+
+This project demonstrates **Player Re-Identification (ReID)** in football videos, matching player identities across two distinct camera angles using state-of-the-art object detection, tracking, and deep visual embeddings.
+
+---
+
+## 📁 Project Structure
 
 ```
 Assignment_liat.ai/
 ├── detect_and_match.py        # Main runner script
-├── best.pt                    # Pretrained YOLOv8 model (not in repo due to size)
+├── best.pt                    # Pretrained YOLOv8 model (not in repo)
 ├── utils/
 │   ├── tracker.py             # Player and ball tracking logic
 │   └── matcher.py             # Player matching logic using embeddings
@@ -19,102 +28,114 @@ Assignment_liat.ai/
 │   ├── broadcast.mp4
 │   └── tacticam.mp4
 ├── player_mappings.csv        # Final ID mapping results
-└── resume.pdf                 # Your latest resume
+└── resume.pdf                 # Author's resume
 ```
 
 ---
 
-## ✅ Assignment Checklist
+## ✅ Features
 
-* [x] Player detection using YOLOv8
-* [x] Player tracking using DeepSORT
-* [x] Identity matching between views
-* [x] Visual+spatial embedding based scoring
-* [x] Final mapping CSV created
-* [x] Matched image pairs saved for verification
-* [x] README with instructions and structure
-* [x] Resume attached (`resume.pdf`)
-* [ ] Optional: Note on computer vision/VLM experience
+- **Player Detection:** Custom YOLOv8 model trained for football players and ball.
+- **Tracking:** DeepSORT for robust multi-object tracking.
+- **Cross-View Matching:** Visual (ResNet18 embeddings) + spatial similarity.
+- **Debug Outputs:** Side-by-side match images for verification.
+- **Easy Reproducibility:** Cached results to avoid recomputation.
+- **Extensible:** Modular code for further research or improvements.
 
 ---
 
-## ⚙️ Setup Instructions
+## 🚀 Quick Start
 
-### 1. Create Virtual Environment
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/Assignment_liat.ai.git
+cd Assignment_liat.ai
+```
+
+### 2. Set Up Environment
 
 ```bash
 python -m venv venv
-source venv/bin/activate  # or venv\Scripts\activate on Windows
+# On Windows:
+venv\Scripts\activate
+# On Linux/Mac:
+source venv/bin/activate
 ```
 
-### 2. Install Dependencies
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
-
-If you don’t have a `requirements.txt`, install manually:
-
+<sub>If `requirements.txt` is missing:</sub>
 ```bash
 pip install opencv-python torch torchvision ultralytics deep_sort_realtime
 ```
 
-### 3. Place YOLO Model
+### 4. Add Model Weights
 
-Put the provided `best.pt` file (custom YOLOv8 model) into the root folder.
+Place the provided `best.pt` YOLOv8 model in the project root.
 
-### 4. Run the Main Script
+### 5. Run the Pipeline
 
 ```bash
 python detect_and_match.py
 ```
 
-This will:
-
-* Load or generate tracking data using YOLO and DeepSORT
-* Extract deep visual features from frames
-* Match players across views using cosine similarity and spatial distance
-* Save matched image pairs and ID mappings
-
 ---
 
-## 🧠 How Matching Works
+## 🧠 Methodology
 
-1. Players are detected and tracked in both videos using YOLO + DeepSORT.
-2. Each player’s best frame is selected based on bounding box area.
-3. Cropped images are passed through ResNet18 to extract embeddings.
-4. Visual similarity + spatial distance are used to compute a matching score.
-5. Debug images are saved, and final mapping is exported to CSV.
+1. **Detection & Tracking:**  
+   Players are detected and tracked in both videos using YOLOv8 + DeepSORT.
+2. **Frame Selection:**  
+   For each player, the frame with the largest bounding box is chosen.
+3. **Embedding Extraction:**  
+   Cropped player images are passed through ResNet18 to obtain deep embeddings.
+4. **Matching:**  
+   Cosine similarity (visual) and spatial distance are combined for matching.
+5. **Results:**  
+   - Matched pairs are saved as images in `results/matches/`.
+   - Final ID mappings are exported to `player_mappings.csv`.
 
 ---
 
 ## 📄 Output Files
 
-* `player_mappings.csv`: Lists matched player IDs between the two videos
-* `results/matches/*.jpg`: Side-by-side comparison images of matched players
-* `.pkl` files: Cached detection/tracking outputs to avoid recomputation
+- `player_mappings.csv` &nbsp;→&nbsp; Matched player IDs between both views
+- `results/matches/*.jpg` &nbsp;→&nbsp; Side-by-side images of matched players
+- `.pkl` files &nbsp;→&nbsp; Cached detection/tracking outputs
 
 ---
 
-## 🔍 Notes
+## 📝 Notes
 
-* The object detector is trained specifically on football player and ball classes
-* Only valid bounding boxes are used for embeddings
-* All preprocessing (resizing, normalization) follows ImageNet standards
-
----
-
-## 🧩 To Improve
-
-* Add OCR to detect jersey numbers
-* Use temporal consistency (track overlap) for more robust matching
-* Apply L2-normalization to embeddings
-* Save matching scores per pair for analysis
+- The YOLOv8 model is custom-trained for football players and the ball.
+- Only valid bounding boxes are used for embedding extraction.
+- All preprocessing (resizing, normalization) follows ImageNet standards.
+- The code is modular and easy to extend for research or production.
 
 ---
 
-## 🙌 Author
+## 🧩 Potential Improvements
 
-Prepared by Harshita Pandey for LIAT.AI assignment.
+- Integrate OCR for jersey number recognition.
+- Use temporal consistency (track overlap) for more robust matching.
+- Apply L2-normalization to embeddings.
+- Save and analyze matching scores for each pair.
+
+---
+
+## 🙋 About the Author
+
+Prepared by **Harshita Pandey** for the LIAT.AI assignment.  
+For questions or collaboration, please refer to the attached `resume.pdf`.
+
+---
+
+## 📜 License
+
+This project is for educational and demonstration purposes only.
 
 
