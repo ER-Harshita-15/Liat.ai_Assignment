@@ -46,7 +46,7 @@ Assignment_liat.ai/
 
 1. **Clone the Repository**
     ```bash
-    git clone https://github.com/yourusername/Assignment_liat.ai.git
+    git clone https://github.com/ER-Harshita-15/Liat.ai_Assignment
     cd Assignment_liat.ai
     ```
 
@@ -109,7 +109,7 @@ Assignment_liat.ai/
 ## About the Author
 
 Prepared by **Harshita Pandey** for the LIAT.AI assignment.  
-For questions or collaboration, please refer to the attached `resume.pdf`.
+For questions or collaboration, please refer to the attached `Resume.docx`.
 
 ## License
 
